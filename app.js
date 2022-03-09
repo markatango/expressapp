@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const exphbs = require('express-handlebars');
+const { engine } = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path=require('path');
 const session = require('express-session');
@@ -14,8 +14,9 @@ require('./config/passport')(passport);
 const port = process.env.PORT || 3000;
 
 //handle bar middleware
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine('handlebars', engine({defaultLayout: "main"}));
 app.set('view engine', 'handlebars');
+app.set('views', './views')
 
 //method override middleware
 app.use(methodOverride('_method'))
